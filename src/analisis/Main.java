@@ -8,6 +8,9 @@ public class Main {
 		
 		AnalizadorSintactico sintactico = new AnalizadorSintactico(lexico);
 		
+		lexico.pruebaLecturaLinea();
+		lexico.pruebaLecturaLinea();
+		
 
 	}
 

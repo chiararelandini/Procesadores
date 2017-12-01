@@ -23,6 +23,9 @@ public class AnalizadorLexico {
 		
 		conjunto = new Conjunto();
 		
+	}
+	
+	public void pruebaLecturaLinea(){
 		try {
 			System.out.println(leerLinea());
 		} catch (IOException e) {
