@@ -33,6 +33,7 @@ public class Conjunto {
 		delimitadores.add((char)32);
 		delimitadores.add((char)9);
 		
+
 		operadores.add((char)43);
 		operadores.add((char)45);
 		operadores.add((char)47);
