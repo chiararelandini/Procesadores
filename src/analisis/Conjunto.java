@@ -33,9 +33,8 @@ public class Conjunto {
 		delimitadores.add((char)32);
 		delimitadores.add((char)9);
 		
-		//operadores.add((char)42); ¿por que pusimos la multipicación?
+
 		operadores.add((char)43);
-		//cambio
 		operadores.add((char)45);
 		operadores.add((char)47);
 		operadores.add((char)125);
