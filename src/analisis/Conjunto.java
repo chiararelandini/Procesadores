@@ -35,6 +35,7 @@ public class Conjunto {
 		
 		//operadores.add((char)42); ¿por que pusimos la multipicación?
 		operadores.add((char)43);
+		
 		operadores.add((char)45);
 		operadores.add((char)47);
 		operadores.add((char)125);
