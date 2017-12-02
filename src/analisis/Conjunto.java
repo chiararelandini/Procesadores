@@ -33,10 +33,17 @@ public class Conjunto {
 		delimitadores.add((char)32);
 		delimitadores.add((char)9);
 		
-		operadores.add((char)42);
 		operadores.add((char)43);
 		operadores.add((char)45);
 		operadores.add((char)47);
+		operadores.add((char)125);
+		operadores.add((char)123);
+		operadores.add((char)33);
+		operadores.add((char)40);
+		operadores.add((char)41);
+		operadores.add((char)60);
+		operadores.add((char)44);
+		operadores.add((char)59);
 	}
 	
 	public Set<Character> getDigitos(){
