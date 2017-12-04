@@ -8,7 +8,6 @@ public class Conjunto {
 	private Set<Character> digitos = new HashSet<Character>();
 	private Set<Character> letras = new HashSet<Character>();
 	private Set<Character> caracteres = new HashSet<Character>();
-	private Set<Character> caracteres1 = new HashSet<Character>();
 	private Set<Character> delimitadores = new HashSet<Character>();
 	private Set<Character> operadores = new HashSet<Character>();
 	
@@ -58,11 +57,7 @@ public class Conjunto {
 	public Set<Character> getCaracteres(){
 		return caracteres;
 	}
-	
-	public Set<Character> getCaracteres1(){
-		return caracteres1;
-	}
-	
+
 	public Set<Character> getDelimitadores(){
 		return delimitadores;
 	}
