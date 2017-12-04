@@ -61,9 +61,7 @@ public class AnalizadorLexico {
 				else {
 					//se ha llegado al final del "token" (aunque no es la única manera); aquí deberíamos:
 					//comprobar las acciones semánticas del tipo de token,
-					if(!token.AccionSemantica()) { 
-						//error
-					}
+					
 					//insertarlo en la tabla entes de salir del bucle	!!!!
 					
 					pideToken=false;
@@ -87,12 +85,15 @@ public class AnalizadorLexico {
 					token.SetTipo(TipoToken.IDENTIFICADOR);
 					token.SetLexema(ptr);
 					leido = true;
+				}else if (token.GetTipo().equals(TipoToken.CADENA)&& ptr != '"') {
+					token.Concatenar(ptr);
 				}else if (conjunto.getOperadores().contains(ptr)) {
 					switch(ptr){
 					case '+': 
 						if (!token.GetTipo().equals(null)) {
 							//almacenar los datos en la tabla en caso de identificador.
 							//devolver el token que acaba de acabar
+							
 							i--;//para que en la siguiente iteración vuelva a estar en este simbolo y lo procese
 						}else {
 							token.SetTipo(TipoToken.OP_REL_MENOR);
@@ -165,7 +166,6 @@ public class AnalizadorLexico {
 						if (token.GetTipo().equals(TipoToken.CADENA)) {
 							//almacenar los datos en la tabla en caso de identificador.
 							//devolver el token que acaba de acabar
-							i--;	//para que en la siguiente iteración vuelva a estar en este simbolo y lo procese
 						}else {
 							if (token.GetTipo().equals(null)) {
 								token.SetTipo(TipoToken.CADENA);
@@ -182,6 +182,12 @@ public class AnalizadorLexico {
 			}
 			
 				
+		}
+		if (token.GetTipo().equals(TipoToken.IDENTIFICADOR)) {
+			//comprobar si es palabra reservada 
+			if (!token.AccionSemantica()) {
+				//error
+			}
 		}
 		return token;
 

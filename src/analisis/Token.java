@@ -5,7 +5,12 @@ public class Token {
 	private TipoToken tipo;
 	private int valor=0;
 	private String lexema = "";
+	private int tamano;
+	static AnalizadorSintactico AS;
 	
+	static public void setAnalizadorSintactico(AnalizadorSintactico as) {
+		AS=as;
+	}
 
 	public void SetTipo (TipoToken tipo) {
 		this.tipo=tipo;
@@ -49,6 +54,20 @@ public class Token {
 			 * 		si está generar token
 			 * si está generar token 
 			 */
+			if (!AS.TablaPR.contains(this.lexema)) {
+				// consultar flag de zona de declaracion de variables 
+				//if (flag_declaracion)	añadir a TS
+				EntradaTS e;
+				if (!AS.Tabla_Simbolos.isEmpty()) {
+					EntradaTS ant = AS.Tabla_Simbolos.getLast();
+					e = new EntradaTS(this.lexema, ant.getIndex()+1);
+				}else { e = new EntradaTS(this.lexema, 0);}
+				AS.Tabla_Simbolos.add(e);
+				//else (flag_declaracion=false)
+				if (!AS.Tabla_Simbolos.contains(this.lexema)) {
+					//error identificador no declarado
+				}
+			}
 			acsem=true;
 		}
 		return acsem;

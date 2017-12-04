@@ -8,6 +8,7 @@ public class Conjunto {
 	private Set<Character> digitos = new HashSet<Character>();
 	private Set<Character> letras = new HashSet<Character>();
 	private Set<Character> caracteres = new HashSet<Character>();
+	private Set<Character> caracteres_todos = new HashSet<Character>();
 	private Set<Character> delimitadores = new HashSet<Character>();
 	private Set<Character> operadores = new HashSet<Character>();
 	
@@ -24,10 +25,12 @@ public class Conjunto {
 		caracteres.addAll(digitos);
 		caracteres.add('_');
 		
-		for(int i = 32; i < 127; i++)
-			caracteres.add((char)i);
-		caracteres.remove((char)92);
-		caracteres.remove((char)34);
+		
+		
+		for(int i = 32; i < 126; i++)
+			caracteres_todos.add((char)i);
+		caracteres_todos.remove((char)34);
+		
 		
 		delimitadores.add((char)32);
 		delimitadores.add((char)9);
