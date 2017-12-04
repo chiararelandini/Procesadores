@@ -24,5 +24,6 @@ public class AnalizadorSintactico {
 		Token.setAnalizadorSintactico(this);
 	}
 	
+	//cuando termina leer tokens cerrar fichero fuente y tokens
 
 }

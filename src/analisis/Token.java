@@ -7,6 +7,7 @@ public class Token {
 	private String lexema = "";
 	private int tamano;
 	static AnalizadorSintactico AS;
+	private EntradaTS entradaTS = null;
 	
 	static public void setAnalizadorSintactico(AnalizadorSintactico as) {
 		AS=as;
@@ -30,10 +31,16 @@ public class Token {
 	public void Concatenar(char caracter) {
 		this.lexema=this.lexema+caracter;
 	}
+	public String GetLexema () {
+		return this.lexema;
+	}
+	public EntradaTS getEntradaTS(){
+		return entradaTS;
+	}
 
 	/*
 	 * Esta funcion comprueba y devuelve si se cumple la accion semantica del token y, 
-	 * en caso afirmativo, genera el token. El token ya esta generado, pero habría que 
+	 * en caso afirmativo, genera el token. El token ya esta generado, pero habrï¿½a que 
 	 * guardarlo en la TS si procede o no, y, en caso contrario, generar un mensaje de error
 	 */
 	public boolean AccionSemantica() {
@@ -49,20 +56,21 @@ public class Token {
 		case IDENTIFICADOR:
 			/*
 			 * buscar en TPRes token.pal
-			 * si no está buscar en TS token.pal
-			 * 		si no está añadir y generar token
-			 * 		si está generar token
-			 * si está generar token 
+			 * si no estï¿½ buscar en TS token.pal
+			 * 		si no estï¿½ aï¿½adir y generar token
+			 * 		si estï¿½ generar token
+			 * si estï¿½ generar token 
 			 */
 			if (!AS.TablaPR.contains(this.lexema)) {
 				// consultar flag de zona de declaracion de variables 
-				//if (flag_declaracion)	añadir a TS
+				//if (flag_declaracion)	aï¿½adir a TS
 				EntradaTS e;
 				if (!AS.Tabla_Simbolos.isEmpty()) {
 					EntradaTS ant = AS.Tabla_Simbolos.getLast();
 					e = new EntradaTS(this.lexema, ant.getIndex()+1);
 				}else { e = new EntradaTS(this.lexema, 0);}
 				AS.Tabla_Simbolos.add(e);
+				entradaTS = e;
 				//else (flag_declaracion=false)
 				if (!AS.Tabla_Simbolos.contains(this.lexema)) {
 					//error identificador no declarado

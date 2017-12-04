@@ -1,13 +1,16 @@
 package analisis;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 public class AnalizadorLexico {
 	
 	private BufferedReader br = null;
+	private BufferedWriter bw = null;
 	private String fichero;
 	private boolean pideToken = false;
 	private boolean leyendo = false;
@@ -23,6 +26,15 @@ public class AnalizadorLexico {
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		
+		try {
+			bw = new BufferedWriter(new FileWriter("fichero_de_tokens"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		this.pideToken=false;
 		this.linea=null;
 		conjunto = new Conjunto();
@@ -55,12 +67,12 @@ public class AnalizadorLexico {
 		for (; i < n && pideToken; i++) {
 			ptr=linea.charAt(i);
 			boolean leido = false;	//creamos esta variable para controlar que estamos pasando delimitadores 
-									//de antes del token, ya que los de después indican generacion de Tokens
+									//de antes del token, ya que los de despuï¿½s indican generacion de Tokens
 			if (conjunto.getDelimitadores().contains(ptr)) {
 				if (!leido) continue;
 				else {
-					//se ha llegado al final del "token" (aunque no es la única manera); aquí deberíamos:
-					//comprobar las acciones semánticas del tipo de token,
+					//se ha llegado al final del "token" (aunque no es la ï¿½nica manera); aquï¿½ deberï¿½amos:
+					//comprobar las acciones semï¿½nticas del tipo de token,
 					
 					//insertarlo en la tabla entes de salir del bucle	!!!!
 					
@@ -94,7 +106,7 @@ public class AnalizadorLexico {
 							//almacenar los datos en la tabla en caso de identificador.
 							//devolver el token que acaba de acabar
 							
-							i--;//para que en la siguiente iteración vuelva a estar en este simbolo y lo procese
+							i--;//para que en la siguiente iteraciï¿½n vuelva a estar en este simbolo y lo procese
 						}else {
 							token.SetTipo(TipoToken.OP_REL_MENOR);
 						}
@@ -102,7 +114,7 @@ public class AnalizadorLexico {
 						if (!token.GetTipo().equals(null)) {
 							//almacenar los datos en la tabla en caso de identificador.
 							//devolver el token que acaba de acabar
-							i--;//para que en la siguiente iteración vuelva a estar en este simbolo y lo procese
+							i--;//para que en la siguiente iteraciï¿½n vuelva a estar en este simbolo y lo procese
 						}else {
 							token.SetTipo(TipoToken.OP_REL_MENOR);
 						}
@@ -110,7 +122,7 @@ public class AnalizadorLexico {
 						if (!token.GetTipo().equals(null)) {
 							//almacenar los datos en la tabla en caso de identificador.
 							//devolver el token que acaba de acabar
-							i--;//para que en la siguiente iteración vuelva a estar en este simbolo y lo procese
+							i--;//para que en la siguiente iteraciï¿½n vuelva a estar en este simbolo y lo procese
 						}else {
 							token.SetTipo(TipoToken.PARENTESIS_ABIERTOS);
 						}
@@ -118,7 +130,7 @@ public class AnalizadorLexico {
 						if (!token.GetTipo().equals(null)) {
 							//almacenar los datos en la tabla en caso de identificador.
 							//devolver el token que acaba de acabar
-							i--;//para que en la siguiente iteración vuelva a estar en este simbolo y lo procese
+							i--;//para que en la siguiente iteraciï¿½n vuelva a estar en este simbolo y lo procese
 						}else {
 							token.SetTipo(TipoToken.PARENTESIS_CERRADOS);
 						}
@@ -126,7 +138,7 @@ public class AnalizadorLexico {
 						if (!token.GetTipo().equals(null)) {
 							//almacenar los datos en la tabla en caso de identificador.
 							//devolver el token que acaba de acabar
-							i--;//para que en la siguiente iteración vuelva a estar en este simbolo y lo procese
+							i--;//para que en la siguiente iteraciï¿½n vuelva a estar en este simbolo y lo procese
 						}else {
 							token.SetTipo(TipoToken.OP_LOG_NEGACION);
 						}
@@ -134,7 +146,7 @@ public class AnalizadorLexico {
 						if (!token.GetTipo().equals(null)) {
 							//almacenar los datos en la tabla en caso de identificador.
 							//devolver el token que acaba de acabar
-							i--;//para que en la siguiente iteración vuelva a estar en este simbolo y lo procese
+							i--;//para que en la siguiente iteraciï¿½n vuelva a estar en este simbolo y lo procese
 						}else {
 							token.SetTipo(TipoToken.SEPARADOR_COMA);
 						}
@@ -142,7 +154,7 @@ public class AnalizadorLexico {
 						if (!token.GetTipo().equals(null)) {
 							//almacenar los datos en la tabla en caso de identificador.
 							//devolver el token que acaba de acabar
-							i--;	//para que en la siguiente iteración vuelva a estar en este simbolo y lo procese
+							i--;	//para que en la siguiente iteraciï¿½n vuelva a estar en este simbolo y lo procese
 						}else {
 							token.SetTipo(TipoToken.SEPARADOR_PUNTOCOMA);
 						}
@@ -150,7 +162,7 @@ public class AnalizadorLexico {
 						if (!token.GetTipo().equals(null)) {
 							//almacenar los datos en la tabla en caso de identificador.
 							//devolver el token que acaba de acabar
-							i--;	//para que en la siguiente iteración vuelva a estar en este simbolo y lo procese
+							i--;	//para que en la siguiente iteraciï¿½n vuelva a estar en este simbolo y lo procese
 						}else {
 							token.SetTipo(TipoToken.LLAVE_ABIERTA);
 						}
@@ -158,7 +170,7 @@ public class AnalizadorLexico {
 						if (!token.GetTipo().equals(null)) {
 							//almacenar los datos en la tabla en caso de identificador.
 							//devolver el token que acaba de acabar
-							i--;	//para que en la siguiente iteración vuelva a estar en este simbolo y lo procese
+							i--;	//para que en la siguiente iteraciï¿½n vuelva a estar en este simbolo y lo procese
 						}else {
 							token.SetTipo(TipoToken.LLAVE_CERRADA);
 						}
@@ -171,12 +183,12 @@ public class AnalizadorLexico {
 								token.SetTipo(TipoToken.CADENA);
 								leido=true;
 							}else {
-								// Función de error
+								// Funciï¿½n de error
 							}
 						}
 					}
 				}else {
-					//invocar a una función de error
+					//invocar a una funciï¿½n de error
 				}
 			leido=true;
 			}
@@ -189,7 +201,43 @@ public class AnalizadorLexico {
 				//error
 			}
 		}
+		
 		return token;
 
+	}
+	
+	private void imprimirToken(Token token){
+		switch(token.GetTipo()){
+		case IDENTIFICADOR:
+			try {
+				bw.append("< " + token.GetTipo().toString() + ", " + token.getEntradaTS().getIndex() + " >");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		case CONSTANTE_ENTERA:
+			try {
+				bw.append("< " + token.GetTipo().toString() + ", " + token.GetValor()+ " >");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		case CADENA:
+			try {
+				bw.append("< " + token.GetTipo().toString() + ", " + token.GetLexema()+ " >");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		case PALABRA_RESERVADA:
+			try {
+				bw.append("< " + token.GetTipo().toString() + ", " + token.GetLexema()+ " >");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		default:
+			try {
+				bw.append("< " + token.GetTipo().toString() + ",  >");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
