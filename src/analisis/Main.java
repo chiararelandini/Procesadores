@@ -7,9 +7,7 @@ public class Main {
 		AnalizadorLexico lexico = new AnalizadorLexico(args[0]);
 		
 		AnalizadorSintactico sintactico = new AnalizadorSintactico(lexico);
-		
-		lexico.pruebaLecturaLinea();
-		lexico.pruebaLecturaLinea();
+	
 		
 
 	}
