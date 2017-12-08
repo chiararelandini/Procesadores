@@ -42,7 +42,7 @@ public class AnalizadorLexico {
 
 	private void leerLinea(){
 		//si la linea es null (aun hay que empezar a leer el fichero) o ha terminado: leer otra línea y poner el puntero a 0
-		if(linea == null || i == linea.length()){
+		if(linea == null || i >= linea.length()){
 			i = 0;
 			try {
 				linea = br.readLine().trim();
@@ -64,6 +64,7 @@ public class AnalizadorLexico {
 		leerLinea();
 		int n = linea.length();
 		Token token= new Token();
+		boolean comentario = false;
 		for (; i < n && pideToken; i++) {
 			ptr=linea.charAt(i);
 			boolean leido = false;	//creamos esta variable para controlar que estamos pasando delimitadores 
@@ -186,6 +187,15 @@ public class AnalizadorLexico {
 								// Funci�n de error
 							}
 						}
+					case '/':
+						if(comentario){		//cuando el anterior es '/' entonces es un comentario
+							if(linea.charAt(i-1) == '/')
+								i = linea.length();		// ir directamente al fin de linea
+							//else
+								//error: no puede existir '/' isolado
+						}
+						if(!comentario)		//primer '/' encontrado => necesitamos 2 para reconocer comentario
+							comentario = true;
 					}
 				}else {
 					//invocar a una funci�n de error
